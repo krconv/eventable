@@ -63,7 +63,7 @@ class EventEmitter{
     //make eventQueues execute async so only one event queue is ever executing at a time.
     finished = new Future<Event>.delayed(new Duration(), (){
       event._finished = finished;
-      _emittingType = reflect(data).type.reflectedType;
+      _emittingType = data.runtimeType;
       if(_actionQueues != null && _actionQueues[_emittingType] != null){
         _actionQueues[_emittingType].forEach((EventAction action){ action(event); });
       }
